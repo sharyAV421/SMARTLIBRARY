@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: smartlibrary-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/prestamos
+    envVars:
+      - key: PORT
+        value: 10000

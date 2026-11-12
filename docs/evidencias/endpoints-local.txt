@@ -1,0 +1,6 @@
+POST válido: 201 {"id":1,"fechaPrestamo":"2026-11-12","fechaDevolucion":null,"estudianteId":1,"estudianteNombre":"Ana Pérez","libroId":1,"libroTitulo":"Diseño de software"}
+Libro no disponible: 409 {"error":"El libro 1 no está disponible"}
+Estudiante inexistente: 404 {"error":"No existe el estudiante 999"}
+Libro inexistente: 404 {"error":"No existe el libro 999"}
+GET préstamos: 200 [{"id":1,"fechaPrestamo":"2026-11-12","fechaDevolucion":null,"estudianteId":1,"estudianteNombre":"Ana Pérez","libroId":1,"libroTitulo":"Diseño de software"}]
+Datos inválidos: 400 {"error":"Solicitud inválida","detalles":{"estudianteId":"estudianteId es obligatorio","libroId":"libroId es obligatorio"}}

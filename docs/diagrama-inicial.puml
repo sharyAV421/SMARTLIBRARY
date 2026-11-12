@@ -1,0 +1,20 @@
+@startuml
+title SmartLibrary - modelo inicial
+class Estudiante {
+  id: Long
+  nombre: String
+  correo: String
+}
+class Libro {
+  id: Long
+  titulo: String
+  disponible: boolean
+}
+class Prestamo {
+  id: Long
+  fechaPrestamo: LocalDate
+  fechaDevolucion: LocalDate [0..1]
+}
+Estudiante "1" -- "0..*" Prestamo
+Libro "1" -- "0..*" Prestamo
+@enduml

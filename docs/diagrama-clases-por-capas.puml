@@ -1,0 +1,79 @@
+@startuml
+title SmartLibrary - clases por capas
+package controller {
+  class PrestamoController {
+    +registrar(solicitud: PrestamoRequest): ResponseEntity<PrestamoResponse>
+    +listar(): List<PrestamoResponse>
+  }
+}
+package service {
+  class PrestamoService {
+    +registrar(solicitud: PrestamoRequest): PrestamoResponse
+    +listar(): List<PrestamoResponse>
+  }
+}
+package repository {
+  interface EstudianteRepository
+  interface LibroRepository {
+    +findByIdForUpdate(id: Long): Optional<Libro>
+  }
+  interface PrestamoRepository {
+    +existsByLibroIdAndFechaDevolucionIsNull(libroId: Long): boolean
+    +findAllByOrderByIdAsc(): List<Prestamo>
+  }
+}
+package model {
+  class Estudiante {
+    -id: Long
+    -nombre: String
+    -correo: String
+  }
+  class Libro {
+    -id: Long
+    -titulo: String
+    -disponible: boolean
+    +marcarComoPrestado(): void
+  }
+  class Prestamo {
+    -id: Long
+    -fechaPrestamo: LocalDate
+    -fechaDevolucion: LocalDate [0..1]
+  }
+}
+package dto {
+  class PrestamoRequest {
+    +estudianteId: Long <<NotNull, Positive>>
+    +libroId: Long <<NotNull, Positive>>
+  }
+  class PrestamoResponse {
+    +id: Long
+    +fechaPrestamo: LocalDate
+    +fechaDevolucion: LocalDate
+    +estudianteId: Long
+    +estudianteNombre: String
+    +libroId: Long
+    +libroTitulo: String
+  }
+}
+package exception {
+  class RecursoNoEncontradoException
+  class LibroNoDisponibleException
+  class GlobalExceptionHandler <<RestControllerAdvice>>
+}
+PrestamoController --> PrestamoService
+PrestamoController ..> PrestamoRequest
+PrestamoController ..> PrestamoResponse
+PrestamoService --> EstudianteRepository
+PrestamoService --> LibroRepository
+PrestamoService --> PrestamoRepository
+EstudianteRepository ..> Estudiante
+LibroRepository ..> Libro
+PrestamoRepository ..> Prestamo
+Prestamo "*" --> "1" Estudiante
+Prestamo "*" --> "1" Libro
+PrestamoService ..> RecursoNoEncontradoException
+PrestamoService ..> LibroNoDisponibleException
+PrestamoService ..> PrestamoResponse
+GlobalExceptionHandler ..> RecursoNoEncontradoException
+GlobalExceptionHandler ..> LibroNoDisponibleException
+@enduml

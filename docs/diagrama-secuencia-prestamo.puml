@@ -1,0 +1,30 @@
+@startuml
+title Registrar préstamo
+actor Cliente
+participant PrestamoController
+participant PrestamoService
+participant EstudianteRepository
+participant LibroRepository
+participant PrestamoRepository
+database H2
+Cliente -> PrestamoController: POST /api/prestamos (estudianteId, libroId)
+PrestamoController -> PrestamoService: registrar(solicitud)
+PrestamoService -> EstudianteRepository: findById(estudianteId)
+EstudianteRepository -> H2: consultar estudiante
+H2 --> EstudianteRepository: estudiante
+PrestamoService -> LibroRepository: findByIdForUpdate(libroId)
+LibroRepository -> H2: bloquear y consultar libro
+H2 --> LibroRepository: libro
+PrestamoService -> PrestamoRepository: existsByLibroIdAndFechaDevolucionIsNull(libroId)
+PrestamoRepository -> H2: comprobar préstamo activo
+H2 --> PrestamoRepository: no existe
+PrestamoService -> PrestamoService: validar disponible; marcar no disponible
+PrestamoService -> PrestamoRepository: save(prestamo con fecha actual)
+PrestamoRepository -> H2: insertar préstamo y confirmar transacción
+H2 --> PrestamoRepository: préstamo persistido
+PrestamoService --> PrestamoController: préstamo
+PrestamoController --> Cliente: 201 Created
+note over PrestamoService,H2
+  Si hay error, la transacción revierte el cambio y la inserción.
+end note
+@enduml
