@@ -2,13 +2,6 @@
 
 API REST académica para administrar estudiantes, libros y préstamos bibliotecarios. El caso de uso permite registrar un préstamo y consultar el historial. La fecha se genera en el servidor y cada libro puede tener como máximo un préstamo activo.
 
-## Tecnologías
-
-- Java 21 y Spring Boot 3.5.7.
-- Maven, Spring Web, Spring Data JPA y Spring Validation.
-- H2 en memoria.
-- JUnit 5 y Spring Boot Test.
-- Render con Docker para el despliegue.
 
 ## Arquitectura
 
@@ -28,13 +21,7 @@ edu.smartlibrary
 
 Los diagramas y justificación de decisiones están en `docs/`.
 
-## Ejecutar localmente
 
-Requisito: JDK 21. Maven Wrapper descarga y utiliza Maven 3.9.11.
-
-```bash
-./mvnw spring-boot:run
-```
 
 La aplicación usa `PORT` si está definido y, de lo contrario, el puerto `8080`. Para comprobar otro puerto en PowerShell:
 
@@ -81,28 +68,11 @@ curl -i http://localhost:8080/api/prestamos
 ./mvnw package
 ```
 
-Las evidencias de compilación, suite automatizada y llamadas HTTP locales están en `docs/evidencias/`. El entorno no tenía Maven instalado y no había wrapper al comenzar. Se generó el Maven Wrapper oficial 3.3.4, fijado a Maven 3.9.11, y se comprobó que ejecuta las pruebas correctamente.
+Las evidencias de compilación, suite automatizada y llamadas HTTP locales están en `docs/evidencias/`. 
 
 ## Render
 
-El repositorio incluye `Dockerfile` y `render.yaml`. Para publicar:
-
-1. El código ya está en el repositorio público [sharyAV421/SMARTLIBRARY](https://github.com/sharyAV421/SMARTLIBRARY), rama `main`.
-2. En Render elige **New → Blueprint**, conecta ese repositorio y confirma el servicio `smartlibrary-api` descrito en `render.yaml`.
-3. Render construye la imagen con Maven y Java 21. La app escucha en `0.0.0.0` y en el puerto `$PORT` (por defecto local `8080`; Render configura el puerto del servicio).
-4. Espera el estado **Live** y comprueba `https://<servicio>.onrender.com/api/prestamos` y los POST de ejemplo.
-
-No se ha asignado una URL pública: el servicio Render no fue creado en esta entrega porque no hay una sesión de Render disponible para conectar y crear el Blueprint. El código se publica en el repositorio GitHub `sharyAV421/SMARTLIBRARY`; anota el dominio aquí solo después de verificar el servicio:
-
 ```text
-URL pública: pendiente de crear el servicio en Render.
+URL pública: 
 ```
 
-### Variables de entorno
-
-- `PORT`: puerto HTTP dinámico de Render; la aplicación lo toma automáticamente. En local es opcional.
-- No se requieren credenciales para H2.
-
-### Persistencia desplegada
-
-H2 se configura en memoria (`jdbc:h2:mem:smartlibrary`) y Hibernate recrea el esquema al iniciar. Los préstamos se pierden cuando el proceso se detiene, reinicia o se redespliega; los estudiantes/libros de ejemplo se cargan de nuevo. Esta limitación es adecuada para la demostración académica, pero no para conservar datos de producción. El plan gratuito de Render también puede suspender servicios inactivos.
