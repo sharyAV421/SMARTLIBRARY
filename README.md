@@ -1,6 +1,6 @@
 # SmartLibrary
 
-## Entrega académica
+## Documento
 
 [Descargar documento final (PDF)](docs/entrega/Taller_SmartLibrary_Final.pdf)
 
