@@ -28,6 +28,10 @@ El bloqueo pesimista requiere soporte del motor de base de datos. H2 en memoria 
 
 `POST /api/prestamos` devuelve `201`, errores de validación `400`, recursos inexistentes `404` y conflicto de disponibilidad `409`. `GET /api/prestamos` devuelve `200`. `GlobalExceptionHandler` traduce excepciones y validaciones a JSON uniforme.
 
+## OpenAPI y Swagger UI
+
+Se usa `springdoc-openapi-starter-webmvc-ui` 2.10.0, compatible con Spring Boot 3.5.x. La autoconfiguración de springdoc publica `/v3/api-docs` y la interfaz en `/swagger-ui/index.html`; las anotaciones OpenAPI del controlador documentan ambos métodos, request, respuestas y códigos HTTP. Esta integración solo describe la API y no cambia las rutas ni sus respuestas.
+
 ## Despliegue y persistencia
 
 Render ejecuta la imagen definida en `Dockerfile`; el puerto y la dirección del servidor se configuran para el `PORT` inyectado por la plataforma y `0.0.0.0`. El esquema es `create-drop` y la URL H2 es `jdbc:h2:mem:smartlibrary`; por tanto, la base y los préstamos desaparecen al parar o reiniciar el proceso. Los datos de ejemplo se vuelven a cargar en cada inicio. H2 se conserva intencionalmente por el alcance académico.

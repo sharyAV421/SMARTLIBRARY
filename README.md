@@ -34,6 +34,8 @@ H2 inicia con dos estudiantes (IDs 1 y 2) y tres libros (IDs 1, 2 y 3); el libro
 
 ## API
 
+La interfaz Swagger UI está disponible en `http://localhost:8080/swagger-ui/index.html` y el documento OpenAPI JSON en `http://localhost:8080/v3/api-docs`.
+
 ### Registrar préstamo
 
 `POST /api/prestamos`

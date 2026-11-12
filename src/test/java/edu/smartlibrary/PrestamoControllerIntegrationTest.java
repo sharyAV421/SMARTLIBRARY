@@ -86,6 +86,25 @@ class PrestamoControllerIntegrationTest {
     }
 
     @Test
+    void publicaSwaggerUiYDocumentaLosEndpointsExistentes() throws Exception {
+        mockMvc.perform(get("/swagger-ui/index.html"))
+                .andExpect(status().isOk());
+
+        String documento = mockMvc.perform(get("/v3/api-docs"))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        var paths = objectMapper.readTree(documento).path("paths").path("/api/prestamos");
+
+        assertThat(paths.has("post")).isTrue();
+        assertThat(paths.path("post").path("responses").has("201")).isTrue();
+        assertThat(paths.path("post").path("responses").has("400")).isTrue();
+        assertThat(paths.path("post").path("responses").has("404")).isTrue();
+        assertThat(paths.path("post").path("responses").has("409")).isTrue();
+        assertThat(paths.has("get")).isTrue();
+        assertThat(paths.path("get").path("responses").has("200")).isTrue();
+    }
+
+    @Test
     void validaCuerpoYNoCreaPrestamoSiFaltanIds() throws Exception {
         mockMvc.perform(post("/api/prestamos").contentType(MediaType.APPLICATION_JSON).content("{}"))
                 .andExpect(status().isBadRequest());

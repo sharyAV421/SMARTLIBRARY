@@ -1,0 +1,4 @@
+GET /swagger-ui/index.html: 200 text/html
+GET /v3/api-docs: 200 application/json
+POST /api/prestamos documentado: True, response codes: 201, 400, 404, 409
+GET /api/prestamos documentado: True, response codes: 200
