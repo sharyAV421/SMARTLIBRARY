@@ -1,5 +1,16 @@
 # SmartLibrary
 
+## Entrega académica
+
+[Descargar documento final (PDF)](docs/entrega/Taller_SmartLibrary_Final.pdf)
+
+## Render
+
+```text
+URL pública: https://smartlibrary-api-2q8b.onrender.com
+```
+
+
 API REST académica para administrar estudiantes, libros y préstamos bibliotecarios. El caso de uso permite registrar un préstamo y consultar el historial. La fecha se genera en el servidor y cada libro puede tener como máximo un préstamo activo.
 
 
@@ -72,13 +83,5 @@ curl -i http://localhost:8080/api/prestamos
 
 Las evidencias de compilación, suite automatizada y llamadas HTTP locales están en `docs/evidencias/`. 
 
-## Render
-
-```text
-URL pública: https://smartlibrary-api-2q8b.onrender.com
-```
 
 
-## Entrega académica
-
-[Descargar documento final (PDF)](docs/entrega/Taller_SmartLibrary_Final.pdf)
