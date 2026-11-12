@@ -22,7 +22,6 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- jar:3.4.2:jar (default-jar) @ smartlibrary ---
-[INFO] Building jar: C:\Users\Sara V\Downloads\SMARTLIBRARY\target\smartlibrary-1.0.0.jar
 [INFO] 
 [INFO] --- spring-boot:3.5.7:repackage (repackage) @ smartlibrary ---
 [INFO] Replacing main artifact C:\Users\Sara V\Downloads\SMARTLIBRARY\target\smartlibrary-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
@@ -30,6 +29,6 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.173 s
-[INFO] Finished at: 2026-11-12T11:14:55-05:00
+[INFO] Total time:  2.320 s
+[INFO] Finished at: 2026-11-12T11:18:40-05:00
 [INFO] ------------------------------------------------------------------------

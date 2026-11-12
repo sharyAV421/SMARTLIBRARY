@@ -30,17 +30,17 @@ Los diagramas y justificación de decisiones están en `docs/`.
 
 ## Ejecutar localmente
 
-Requisitos: JDK 21 y Maven 3.9 o posterior.
+Requisito: JDK 21. Maven Wrapper descarga y utiliza Maven 3.9.11.
 
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 La aplicación usa `PORT` si está definido y, de lo contrario, el puerto `8080`. Para comprobar otro puerto en PowerShell:
 
 ```powershell
 $env:PORT = "18080"
-mvn spring-boot:run
+.\mvnw.cmd spring-boot:run
 ```
 
 H2 inicia con dos estudiantes (IDs 1 y 2) y tres libros (IDs 1, 2 y 3); el libro 3 empieza no disponible. La consola H2 local está en `http://localhost:8080/h2-console`, con JDBC URL `jdbc:h2:mem:smartlibrary`, usuario `sa` y contraseña vacía.
@@ -77,17 +77,17 @@ curl -i http://localhost:8080/api/prestamos
 ## Pruebas y empaquetado
 
 ```bash
-mvn test
-mvn package
+./mvnw test
+./mvnw package
 ```
 
-Las evidencias de compilación, suite automatizada y llamadas HTTP locales están en `docs/evidencias/`. En el entorno de desarrollo de esta entrega no había Maven instalado ni un Maven Wrapper funcional. Las pruebas se ejecutaron con Maven 3.9.11 descargado temporalmente desde Apache. Para otros entornos se requiere Maven 3.9+; puede generarse un wrapper oficial con `mvn wrapper:wrapper` si se desea evitar la instalación global.
+Las evidencias de compilación, suite automatizada y llamadas HTTP locales están en `docs/evidencias/`. El entorno no tenía Maven instalado y no había wrapper al comenzar. Se generó el Maven Wrapper oficial 3.3.4, fijado a Maven 3.9.11, y se comprobó que ejecuta las pruebas correctamente.
 
 ## Render
 
 El repositorio incluye `Dockerfile` y `render.yaml`. Para publicar:
 
-1. Sube el repositorio a GitHub o GitLab accesible para tu cuenta de Render.
+1. El código ya está en el repositorio público [sharyAV421/SMARTLIBRARY](https://github.com/sharyAV421/SMARTLIBRARY), rama `main`.
 2. En Render elige **New → Blueprint**, conecta ese repositorio y confirma el servicio `smartlibrary-api` descrito en `render.yaml`.
 3. Render construye la imagen con Maven y Java 21. La app escucha en `0.0.0.0` y en el puerto `$PORT` (por defecto local `8080`; Render configura el puerto del servicio).
 4. Espera el estado **Live** y comprueba `https://<servicio>.onrender.com/api/prestamos` y los POST de ejemplo.
