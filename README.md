@@ -75,6 +75,6 @@ Las evidencias de compilación, suite automatizada y llamadas HTTP locales está
 ## Render
 
 ```text
-URL pública: 
+URL pública: https://smartlibrary-api-2q8b.onrender.com
 ```
 
