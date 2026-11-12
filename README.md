@@ -78,3 +78,7 @@ Las evidencias de compilación, suite automatizada y llamadas HTTP locales está
 URL pública: https://smartlibrary-api-2q8b.onrender.com
 ```
 
+
+## Entrega académica
+
+[Descargar documento final (PDF)](docs/entrega/Taller_SmartLibrary_Final.pdf)
